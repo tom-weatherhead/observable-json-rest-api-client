@@ -5,14 +5,14 @@ This package can send HTTP requests of type POST, GET, PUT, and DELETE; these ty
 This package's API is:
 
 	request(httpMethod, urlString, requestData, verbose = false)
-	post: (urlString, requestData, verbose = false)
-	get: (urlString, verbose = false)
-	put: (urlString, requestData, verbose = false)
-	delete: (urlString, verbose = false)
+	post(urlString, requestData, verbose = false)
+	get(urlString, verbose = false)
+	put(urlString, requestData, verbose = false)
+	delete(urlString, verbose = false)
 
 post(), get(), put(), and delete() are merely convenience functions that call request() with a specific httpMethod.
 
-Each function returns an RxJS Observable that yields an object with the following fields:
+Each function returns an [RxJS Observable](http://reactivex.io/rxjs/class/es6/Observable.js~Observable.html) that yields an object with the following fields:
 
 	statusCode : The HTTP status code from the response from the server
 	statusMessage : The HTTP status message from the response from the server
