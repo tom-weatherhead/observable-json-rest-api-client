@@ -10,9 +10,9 @@ module.exports = function (grunt) {
 		pkg: packageJsonContents,
 		eslint: {
 			target: [
-				'*.js',
-				'src/*.js',
-				'test/*.js'
+				// '*.js',
+				'src/*.js' //,
+				// 'test/*.js'
 			]
 		},
 		mochaTest: {
@@ -49,6 +49,7 @@ module.exports = function (grunt) {
 	// grunt.loadNpmTasks('grunt-contrib-watch');
 
 	// Aliases:
-	grunt.registerTask('test', ['eslint', 'mochaTest', 'nsp']);
+	// grunt.registerTask('test', ['eslint', 'mochaTest', 'nsp']);
+	grunt.registerTask('test', ['eslint', 'nsp']);
 	grunt.registerTask('default', ['test']);
 };
