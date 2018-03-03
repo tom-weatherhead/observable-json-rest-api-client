@@ -1,17 +1,47 @@
-let engine = require('..');
+const engine = require('..');
 
-let hostname = 'localhost';
-let port = 3000;
-let path1 = '/u/';
-let path2 = '/u/1';
-let data = { "secret": "Wo ai ni!" };
+const url_u = 'http://localhost:3000/u/';
+const url_u1 = url_u + '1';
 
-//engine.post(hostname, port, path1, data);
-//engine.put(hostname, port, path2, data);
-//engine.delete(hostname, port, path2, data);
+const data = { "secret": "Wo ai ni!" };
 
-//engine.post(hostname, port, path1, data).subscribe(
-engine.post('http://localhost:3000/u/', data).subscribe(
+const verbose = true;
+
+engine.get(url_u, verbose).subscribe(
+	result => {
+		console.log('get all result:', result);
+		console.log('get all JSON:', result.jsonResponseBody);
+		// console.log('get JSON name:', result.jsonResponseBody.name);
+		// console.log('get JSON typeof name:', typeof result.jsonResponseBody.name);
+		// console.log('get JSON numUndergraduateStudents:', result.jsonResponseBody.numUndergraduateStudents);
+		// console.log('get JSON typeof numUndergraduateStudents:', typeof result.jsonResponseBody.numUndergraduateStudents);
+	},
+	error => {
+		console.error('get all error:', error);
+	},
+	() => {
+		console.log('get all: Done.');
+	}
+);
+
+engine.get(url_u1, verbose).subscribe(
+	result => {
+		console.log('get one result:', result);
+		console.log('get one JSON:', result.jsonResponseBody);
+		console.log('get one JSON name:', result.jsonResponseBody.name);
+		console.log('get one JSON typeof name:', typeof result.jsonResponseBody.name);
+		console.log('get one JSON numUndergraduateStudents:', result.jsonResponseBody.numUndergraduateStudents);
+		console.log('get one JSON typeof numUndergraduateStudents:', typeof result.jsonResponseBody.numUndergraduateStudents);
+	},
+	error => {
+		console.error('get one error:', error);
+	},
+	() => {
+		console.log('get one: Done.');
+	}
+);
+
+engine.post(url_u, data, verbose).subscribe(
 	result => {
 		console.log('post result:', result);
 	},
@@ -23,8 +53,7 @@ engine.post('http://localhost:3000/u/', data).subscribe(
 	}
 );
 
-//engine.put(hostname, port, path2, data).subscribe(
-engine.put('http://localhost:3000/u/1', data).subscribe(
+engine.put(url_u1, data, verbose).subscribe(
 	result => {
 		console.log('put result:', result);
 	},
@@ -36,8 +65,7 @@ engine.put('http://localhost:3000/u/1', data).subscribe(
 	}
 );
 
-//engine.delete(hostname, port, path2).subscribe(
-engine.delete('http://localhost:3000/u/1', data).subscribe(
+engine.delete(url_u1, verbose).subscribe(
 	result => {
 		console.log('delete result:', result);
 	},
@@ -48,74 +76,3 @@ engine.delete('http://localhost:3000/u/1', data).subscribe(
 		console.log('delete: Done.');
 	}
 );
-
-/*
-engine.observableTest1().subscribe(
-	result => {
-		console.log('observableTest1 result:', result);
-	},
-	error => {
-		console.error('observableTest1 error:', error);
-	},
-	() => {
-		console.log('observableTest1: Done.');
-	}
-);
-
-engine.observableTest2().subscribe(
-	result => {
-		console.log('observableTest2 result:', result);
-	},
-	error => {
-		console.error('observableTest2 error:', error);
-	},
-	() => {
-		console.log('observableTest2: Done.');
-	}
-);
-*/
-
-/*
-let url = 'https://www.google.ca';
-//let urlJson = 'http://nodejs.org/dist/index.json';
-let urlJson = 'https://httpbin.org/uuid';
-let urlRegex = 'https://nodejs.org/en/';
-let regex = /Download v{0,1}(\S+)\s+Current/;
-
-engine.getBodyObs(url).subscribe(
-	result => {
-		console.log('getBodyObs succeeded.');
-		//console.log('getBodyObs result:', result);
-	},
-	error => {
-		console.error('getBodyObs error:', error);
-	},
-	() => {
-		console.log('getBodyObs: Done.');
-	}
-);
-
-engine.getBodyAsJSONObs(urlJson).subscribe(
-	result => {
-		console.log('getBodyAsJSONObs result:', result);
-	},
-	error => {
-		console.error('getBodyAsJSONObs error:', error);
-	},
-	() => {
-		console.log('getBodyAsJSONObs: Done.');
-	}
-);
-
-engine.matchRegexObs(urlRegex, regex).subscribe(
-	result => {
-		console.log('matchRegexObs result:', result);
-	},
-	error => {
-		console.error('matchRegexObs error:', error);
-	},
-	() => {
-		console.log('matchRegexObs: Done.');
-	}
-);
-*/
