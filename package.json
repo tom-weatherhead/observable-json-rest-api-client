@@ -1,6 +1,6 @@
 {
   "name": "observable-json-rest-api-client",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Send HTTP requests (POST, GET, PUT, and DELETE) to JSON REST Web services or other Web servers. Responses are packaged as RxJS Observables.",
   "main": "src/engine.js",
   "homepage": "https://github.com/tom-weatherhead/observable-json-rest-api-client#readme",
