@@ -23,14 +23,17 @@ Each function returns an [RxJS Observable](http://reactivex.io/rxjs/class/es6/Ob
 Example 1: POST:
 
 	const engine = require('observable-json-rest-api-client');
+
 	const postData = {
 		field1: 'abc',
 		field2: 123
 	};
 
-	engine.post('http://localhost:3000/myrestapi/', postData).subscribe(
+	engine.post('https://httpbin.org/post', postData).subscribe(
 		result => {
-			console.log('POST: result:', result);
+			console.log('POST: Result:', result);
+			console.log('POST: Response body as JSON:', result.jsonResponseBody);
+			console.log('POST: Posted data:', result.jsonResponseBody.data);
 		},
 		error => {
 			console.error('POST: Error:', error);

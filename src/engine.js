@@ -55,14 +55,22 @@ function request (method, urlString, requestData = null, verbose = false) {
 					console.log('No more data in the response.');
 				}
 
-				if (method === 'GET') {
+				//if (method === 'GET') {
 
 					try {
 						result.jsonResponseBody = JSON.parse(rawResponseBody);
+
+						if (verbose) {
+							console.log('JSON parse succeeded.');
+						}
 					} catch (error) {
 						result.jsonParseError = error;
+
+						if (verbose) {
+							console.log('JSON parse failed. Error:', error);
+						}
 					}
-				}
+				//}
 
 				if (verbose) {
 					console.log('Sending result:', result.statusCode, result.statusMessage);
@@ -100,10 +108,36 @@ function request (method, urlString, requestData = null, verbose = false) {
 	});
 }
 
+const postRaw = (urlString, requestData, verbose = false) => request('POST', urlString, requestData, verbose);
+const getRaw = (urlString, verbose = false) => request('GET', urlString, null, verbose);
+const putRaw = (urlString, requestData, verbose = false) => request('PUT', urlString, requestData, verbose);
+const deleteRaw = (urlString, verbose = false) => request('DELETE', urlString, null, verbose);
+
+
+const errorHandlerForJsonRequest = result => {
+			
+	if (result.statusCode >= 400) {
+		return Rx.Observable.throw(`HTTP request error: ${result.statusCode} ${result.statusMessage}`);
+	} else if (!result.jsonResponseBody) {
+		return Rx.Observable.throw('HTTP request error: No JSON data in HTTP response body.');
+	}
+	
+	return Rx.Observable.of(result.jsonResponseBody);
+}
+
+const post = (urlString, requestData, verbose = false) => postRaw(urlString, requestData, verbose).switchMap(errorHandlerForJsonRequest);
+const get = (urlString, verbose = false) => getRaw(urlString, verbose).switchMap(errorHandlerForJsonRequest);
+const put = (urlString, requestData, verbose = false) => putRaw(urlString, requestData, verbose).switchMap(errorHandlerForJsonRequest);
+const _delete = (urlString, verbose = false) => deleteRaw(urlString, verbose).switchMap(errorHandlerForJsonRequest);
+
 module.exports = {
 	request: request,
-	post: (urlString, requestData, verbose = false) => request('POST', urlString, requestData, verbose),
-	get: (urlString, verbose = false) => request('GET', urlString, null, verbose),
-	put: (urlString, requestData, verbose = false) => request('PUT', urlString, requestData, verbose),
-	delete: (urlString, verbose = false) => request('DELETE', urlString, null, verbose)
+	postRaw: postRaw,
+	getRaw: getRaw,
+	putRaw: putRaw,
+	deleteRaw: deleteRaw,
+	post: post,
+	get: get,
+	put: put,
+	delete: _delete
 };

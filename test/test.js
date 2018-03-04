@@ -7,6 +7,23 @@ const data = { "secret": "Wo ai ni!" };
 
 const verbose = true;
 
+engine.get('https://httpbin.org/get', verbose).subscribe(
+//engine.get('https://httpbin.org/status/404').subscribe(
+	result => {
+		console.log('GET: Result:', result);
+		// console.log('get JSON name:', result.jsonResponseBody.name);
+		// console.log('get JSON typeof name:', typeof result.jsonResponseBody.name);
+		// console.log('get JSON numUndergraduateStudents:', result.jsonResponseBody.numUndergraduateStudents);
+		// console.log('get JSON typeof numUndergraduateStudents:', typeof result.jsonResponseBody.numUndergraduateStudents);
+	},
+	error => {
+		console.error('GET: Error:', error);
+	},
+	() => {
+		console.log('GET: Done.');
+	}
+);
+/*
 engine.get(url_u, verbose).subscribe(
 	result => {
 		console.log('get all result:', result);
@@ -76,3 +93,4 @@ engine.delete(url_u1, verbose).subscribe(
 		console.log('delete: Done.');
 	}
 );
+*/
