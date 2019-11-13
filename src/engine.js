@@ -3,7 +3,11 @@
 'use strict';
 
 const url = require('url');
-const Rx = require('rxjs/Rx');
+const Rx = require('rxjs');
+const RxJSOperators = require('rxjs/operators');
+const of = Rx.of;
+const throwError = Rx.throwError;
+const switchMap = RxJSOperators.switchMap;
 
 function request (method, urlString, requestData = null, verbose = false) {
 	return Rx.Observable.create(observer => {
@@ -57,19 +61,19 @@ function request (method, urlString, requestData = null, verbose = false) {
 
 				//if (method === 'GET') {
 
-					try {
-						result.jsonResponseBody = JSON.parse(rawResponseBody);
+				try {
+					result.jsonResponseBody = JSON.parse(rawResponseBody);
 
-						if (verbose) {
-							console.log('JSON parse succeeded.');
-						}
-					} catch (error) {
-						result.jsonParseError = error;
-
-						if (verbose) {
-							console.log('JSON parse failed. Error:', error);
-						}
+					if (verbose) {
+						console.log('JSON parse succeeded.');
 					}
+				} catch (error) {
+					result.jsonParseError = error;
+
+					if (verbose) {
+						console.log('JSON parse failed. Error:', error);
+					}
+				}
 				//}
 
 				if (verbose) {
@@ -115,20 +119,20 @@ const deleteRaw = (urlString, verbose = false) => request('DELETE', urlString, n
 
 
 const errorHandlerForJsonRequest = result => {
-			
-	if (result.statusCode >= 400) {
-		return Rx.Observable.throw(`HTTP request error: ${result.statusCode} ${result.statusMessage}`);
-	} else if (!result.jsonResponseBody) {
-		return Rx.Observable.throw('HTTP request error: No JSON data in HTTP response body.');
-	}
-	
-	return Rx.Observable.of(result.jsonResponseBody);
-}
 
-const post = (urlString, requestData, verbose = false) => postRaw(urlString, requestData, verbose).switchMap(errorHandlerForJsonRequest);
-const get = (urlString, verbose = false) => getRaw(urlString, verbose).switchMap(errorHandlerForJsonRequest);
-const put = (urlString, requestData, verbose = false) => putRaw(urlString, requestData, verbose).switchMap(errorHandlerForJsonRequest);
-const _delete = (urlString, verbose = false) => deleteRaw(urlString, verbose).switchMap(errorHandlerForJsonRequest);
+	if (result.statusCode >= 400) {
+		return throwError(`HTTP request error: ${result.statusCode} ${result.statusMessage}`);
+	} else if (!result.jsonResponseBody) {
+		return throwError('HTTP request error: No JSON data in HTTP response body.');
+	}
+
+	return of(result.jsonResponseBody);
+};
+
+const post = (urlString, requestData, verbose = false) => postRaw(urlString, requestData, verbose).pipe(switchMap(errorHandlerForJsonRequest));
+const get = (urlString, verbose = false) => getRaw(urlString, verbose).pipe(switchMap(errorHandlerForJsonRequest));
+const put = (urlString, requestData, verbose = false) => putRaw(urlString, requestData, verbose).pipe(switchMap(errorHandlerForJsonRequest));
+const _delete = (urlString, verbose = false) => deleteRaw(urlString, verbose).pipe(switchMap(errorHandlerForJsonRequest));
 
 module.exports = {
 	request: request,

@@ -22,9 +22,6 @@ module.exports = function (grunt) {
 			test: {
 				src: ['test/*_spec.js']
 			}
-		},
-		nsp: {
-			package: packageJsonContents
 		//},
 		// watch : {
 		//	js : {
@@ -45,10 +42,9 @@ module.exports = function (grunt) {
 	// Tasks:
 	grunt.loadNpmTasks('grunt-eslint');
 	grunt.loadNpmTasks('grunt-mocha-test');
-	grunt.loadNpmTasks('grunt-nsp');
 	// grunt.loadNpmTasks('grunt-contrib-watch');
 
 	// Aliases:
-	grunt.registerTask('test', ['eslint', 'mochaTest', 'nsp']);
+	grunt.registerTask('test', ['eslint', 'mochaTest']);
 	grunt.registerTask('default', ['test']);
 };

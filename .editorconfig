@@ -1,0 +1,26 @@
+# Editor configuration. See https://editorconfig.org
+# List of properties: https://github.com/editorconfig/editorconfig/wiki/EditorConfig-Properties
+
+# Topmost EditorConfig file
+root = true
+
+[*]
+charset = utf-8
+# ... or charset = utf-8-bom ?
+indent_style = tab
+indent_size = tab
+tab_width = 4
+# ... or set indent_size = 4 and comment out tab_width = ...; it will default to the indent_size
+# max_line_length = 78 ? Not supported by all editors
+trim_trailing_whitespace = true
+end_of_line = lf
+insert_final_newline = true
+
+[*.md]
+max_line_length = off
+trim_trailing_whitespace = false
+
+# Spaces are forbidden in YAML files. See https://yaml.org/faq.html
+[*.{yaml,yml}]
+indent_style = space
+indent_size = 2

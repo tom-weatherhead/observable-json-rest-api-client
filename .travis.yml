@@ -1,8 +1,21 @@
+sudo: false
 language: node_js
 node_js:
   - node
+  - 12
+  - 11
+  - 10
+  - 9
   - 8
-
 branches:
   only:
     - master
+cache:
+  directories:
+    - node_modules
+before_install:
+  - npm update
+install:
+  - npm install
+script:
+  - npm test

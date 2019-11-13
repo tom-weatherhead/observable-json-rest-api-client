@@ -1,43 +1,40 @@
 {
-  "name": "observable-json-rest-api-client",
-  "version": "0.1.0",
-  "description": "Send HTTP requests (POST, GET, PUT, and DELETE) to JSON REST Web services or other Web servers. Responses are packaged as RxJS Observables.",
-  "main": "src/engine.js",
-  "homepage": "https://github.com/tom-weatherhead/observable-json-rest-api-client#readme",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/tom-weatherhead/observable-json-rest-api-client.git"
-  },
-  "bugs": {
-    "url": "https://github.com/tom-weatherhead/observable-json-rest-api-client/issues"
-  },
-  "scripts": {
-    "lint": "grunt eslint",
-    "mocha": "grunt mochaTest",
-    "nsp": "grunt nsp",
-    "start": "node test/test.js",
-    "test": "grunt"
-  },
-  "dependencies": {
-    "rxjs": "^5.5.6"
-  },
-  "devDependencies": {
-    "chai": "^4.1.2",
-    "grunt": "^1.0.2",
-    "grunt-eslint": "^20.1.0",
-    "grunt-mocha-test": "^0.13.3",
-    "grunt-nsp": "^2.3.1",
-    "mocha": "^5.0.0"
-  },
-  "keywords": [
-    "HTTP",
-    "JSON",
-    "Observable",
-    "REST"
-  ],
-  "license": "MIT",
-  "author": {
-    "name": "Tom Weatherhead",
-    "url": "https://github.com/tom-weatherhead"
-  }
+	"name": "observable-json-rest-api-client",
+	"version": "0.1.0",
+	"description": "Send HTTP requests (POST, GET, PUT, and DELETE) to JSON REST Web services or other Web servers. Responses are packaged as RxJS Observables.",
+	"main": "src/engine.js",
+	"homepage": "https://github.com/tom-weatherhead/observable-json-rest-api-client#readme",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/tom-weatherhead/observable-json-rest-api-client.git"
+	},
+	"bugs": {
+		"url": "https://github.com/tom-weatherhead/observable-json-rest-api-client/issues"
+	},
+	"scripts": {
+		"all": "npm run clean && npm i && npm test",
+		"clean": "rm -rf node_modules && rm -f package-lock.json",
+		"lint": "grunt eslint",
+		"mocha": "grunt mochaTest",
+		"start": "node test/test.js",
+		"test": "grunt"
+	},
+	"dependencies": {
+		"rxjs": "^6.5.3"
+	},
+	"devDependencies": {
+		"chai": "^4.2.0",
+		"grunt": "^1.0.4",
+		"grunt-eslint": "^22.0.0",
+		"grunt-mocha-test": "^0.13.3",
+		"mocha": "^6.2.2"
+	},
+	"keywords": [
+		"HTTP",
+		"JSON",
+		"Observable",
+		"REST"
+	],
+	"author": "Tom Weatherhead <null@2hrd4u.org> (https://httpbin.org/status/418)",
+	"license": "MIT"
 }
