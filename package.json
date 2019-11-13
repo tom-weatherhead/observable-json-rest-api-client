@@ -1,8 +1,7 @@
 {
 	"name": "observable-json-rest-api-client",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"description": "Send HTTP requests (POST, GET, PUT, and DELETE) to JSON REST Web services or other Web servers. Responses are packaged as RxJS Observables.",
-	"main": "src/engine.js",
 	"homepage": "https://github.com/tom-weatherhead/observable-json-rest-api-client#readme",
 	"repository": {
 		"type": "git",
@@ -11,6 +10,10 @@
 	"bugs": {
 		"url": "https://github.com/tom-weatherhead/observable-json-rest-api-client/issues"
 	},
+	"main": "src/engine.js",
+	"files": [
+		"src/**/*"
+	],
 	"scripts": {
 		"all": "npm run clean && npm i && npm test",
 		"clean": "rm -rf node_modules && rm -f package-lock.json",
