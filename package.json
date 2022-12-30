@@ -27,7 +27,7 @@
 		"grunt": "^1.0.4",
 		"grunt-eslint": "^22.0.0",
 		"grunt-mocha-test": "^0.13.3",
-		"mocha": "^6.2.2"
+		"mocha": "^10.2.0"
 	},
 	"keywords": [
 		"HTTP",
